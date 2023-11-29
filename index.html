@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <title>Card</title>
+    <style>
+        *{
+            margin: 0;padding: 0;box-sizing: border-box;
+        }
+        .card{
+            width: 100%;
+            min-height: 150vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* flex-wrap: wrap; */
+            background-color: rgb(221,238,252);
+            /* transform-style: preserve-3d; */
+        }
+        .inf{
+            width: 40%;
+            /* border: 1px solid red; */
+            background-color: white;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            /* position: relative; */
+            /* transform-style: preserve-3d; */
+            /* position: fixed; */
+            /* rotate: 45deg; */
+        }
+        .inp{
+            width: 30%;
+            height: 249px;
+            position: absolute;
+            left: 35%;
+            top: 7%;
+            border-radius: 10px;
+            box-shadow: 3px 3px 20px black , -3px -3px 20px black;
+            background-image: url(assets/img/5.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 55% 102%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            transform-style: preserve-3d;
+            transition: 1s;
+            z-index: 999;
+            /* overflow: hidden; */
+            /* transform: rotateY(180deg); */
+        }
+        .inp::before{
+            content: "";
+            width: 100%;
+            height: 249px;
+            position: absolute;
+            border-radius: 10px;
+            background-image: url(assets/img/5.jpeg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 55% 102%;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: end;
+            transform: translateZ(-2px);
+            /* z-index: 22; */
+        }
+        .show_num::before{
+            content: '';
+            width: 102.5%;
+            height: 50px;
+            background-color: rgba(0, 0, 0, 0.712);
+            transform: translateZ(-3px) translateY(-80px);
+            position: absolute;
+            font-size: 10px;
+            transform-style: preserve-3d;
+        }
+        .show_cvv{
+            /* content:'' ; */
+            width: 98%;
+            height: 40px;
+            background-color: white;
+            transform: rotateY(180deg)translateZ(2px) translateY(-65px) translateX(-0px);
+            position: absolute;
+            font-size: 10px;
+            border-radius: 5px;
+            transform-style: preserve-3d;
+            text-align: end;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            font-size: 1.2vw;
+            font-weight: 700;
+            margin: 15px 5px;
+            padding: 0 5px ;
+            /* font-family: "Source Code Pro", monospace; */
+        }
+        .show_holder>h6::before{
+            content: 'CVV';
+            width: 10%;
+            height: 25px;
+            color: white;
+            transform-origin: (50% , 50%);
+            transform:rotateY(180deg)translateZ(2px) translateY(-100px);
+            position: absolute;
+            font-size: 1vw;
+            font-weight: 500;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-transform: uppercase;
+            transform-origin: center;
+            font-family: "Source Code Pro", monospace;
+        }
+        .show_expire::before{
+            content: url(assets/img/visa1.png);
+            width: 50% !important;
+            height: 40px;
+            /* background-color: white; */
+            transform: rotateY(180deg)translateZ(2px) translateY(0px) translateX(285px);
+            position: absolute;
+            font-size: 10px;
+            border-radius: 5px;
+            transform-style: preserve-3d;
+            text-align: end;
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            font-size: 1.2vw;
+            font-weight: 700; 
+            object-fit: cover;
+        }
+        .inp>img:nth-of-type(1){
+            width: 16%;
+            height: 20%;
+            position: absolute;
+            top: 10%;
+            left: 7%;
+        }
+        .inp>img:nth-of-type(2){
+            width: 20%;
+            height: 20%;
+            position: absolute;
+            top: 10%;
+            right: 7%;
+        }
+        .show_num{
+            display: flex;
+            justify-content: space-around;
+            width: 100%;
+            color: white;
+            align-items: center;
+            font-size: 2vw;
+            height: 20%;
+            transform: translateY(40px);
+            margin: 0 5px;
+            border-radius: 10px;
+            z-index: -1;
+            transform-style: preserve-3d;
+            font-family: "Source Code Pro", monospace;
+        }
+
+        .show_holder{
+            width: 70%;
+            height: 20%;
+            /* border: 1px solid red; */
+            border-radius: 10px;
+            transform: translateY(-10px);
+            margin: 0 5px;
+            transform-style: preserve-3d;
+        }
+        .show_holder>h6{
+            width: 100%;
+            font-size: 1vw;
+            color: rgba(255, 255, 255, 0.493);
+            padding-left: 5px;
+            font-weight: 300;
+            margin-top: 4px;
+            transform-style: preserve-3d;
+            font-family: "Source Code Pro", monospace;
+        }
+        .show_holder>h4{
+            width: 100%;
+            font-size: 1.6vw;
+            color: rgb(255, 255, 255);
+            padding-left: 5px;
+            font-weight: 300;
+            margin-top: 3px;
+            font-family: "Source Code Pro", monospace;
+        }
+        .show_expire{
+            width: 25%;
+            height: 20%;
+            transform: translateY(-10px);
+            margin: 0 2px;
+            border-radius: 10px;
+            display: flex;
+            flex-wrap: wrap;
+            transform-style: preserve-3d;
+        }
+        .show_expire>span{
+            display: flex;
+            width: 100%;
+            justify-content: center;
+            align-items: center;
+            color: rgb(255, 255, 255);
+            font-family: "Source Code Pro", monospace;
+        }
+        .show_expire>span>span{
+            padding: 0 3px;
+            font-size: 1.3vw;
+        }
+        .show_expire>h6{
+            width: 100%;
+            font-size: 1vw;
+            color: rgba(255, 255, 255, 0.493);
+            /* padding-left: 5px; */
+            display: flex;
+            justify-content: center;
+            font-weight: 300;
+            margin-top: 4px;
+            font-family: "Source Code Pro", monospace;
+        }
+        .c_number{
+            width: 90%;
+            margin-top: 30%;
+            /* border: 1px solid red; */
+            margin: 30% 0 3% 0;
+        }
+        .c_number>h4{
+            margin-bottom: 3px;
+            font-size: 15px;
+            font-family: "Source Sans Pro", sans-serif;
+        }
+        .c_number>div{
+            display: flex;
+            justify-content: space-between;
+        }
+        .c_number>div>input{
+            width: 20%;
+            height: 50px;
+            border-radius: 5px;
+            padding-left: 3%;
+            font-family: "Source Code Pro", monospace;
+        }
+        .c_holder{
+            width: 90%;
+            /* border: 1px solid red;
+             */
+            margin: 3% 0;
+        }
+        .c_holder>h4{
+            margin-bottom: 3px ;
+            font-size: 15px;
+            font-family: "Source Sans Pro", sans-serif;
+        }
+        .c_holder>input{
+            width: 100%;
+            height: 50px;
+            border-radius: 5px;
+            padding-left: 3%;
+            font-family: "Source Code Pro", monospace;
+        }
+        .exp{
+            width: 90%;
+            display: flex;
+            justify-content: space-between;
+            margin: 3% 0;
+        }
+        .date{
+            width: 60%;
+        }
+        .date>h4{
+            margin-bottom: 5px ;
+            font-size: 15px;
+            font-family: "Source Sans Pro", sans-serif;
+        }
+        .p_cvv{
+            width: 30%;
+        }
+        .p_cvv>h4{
+            margin-bottom: 5px;
+            font-size: 14px;
+            font-family: "Source Sans Pro", sans-serif;
+        }
+        .M_Y{
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .M_Y>input:nth-of-type(1){
+            width: 45%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 5%;
+            font-family: "Source Code Pro", monospace;
+        }
+        .M_Y>input:nth-of-type(2){
+            width: 45%;
+            height: 50px;
+            padding-left: 5%;
+            font-family: "Source Code Pro", monospace;
+        }
+        .cvv{
+            width: 100%;
+        }
+        .cvv>input{
+            width: 100%;
+            height: 50px;  
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding-left: 5%;
+            font-family: "Source Code Pro", monospace;
+        }
+        .submit{
+            width: 90%;
+            margin: 3% 0 5% 0;
+        }
+        .submit>button{
+            width: 100%;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background-color: rgb(35,100,210);
+            cursor: pointer;
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            font-size: 1.5vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="inp">
+            <img src="assets/img/6.png" alt="">
+            <img src="assets/img/7.png" alt="">
+            <div class="show_num">
+                <div class="show_num_part_1">
+                    <h4>####</h4>
+                </div>
+                <div class="show_num_part_2">
+                    <h4>####</h4>
+                </div>
+                <div class="show_num_part_3">
+                    <h4>####</h4>
+                </div>
+                <div class="show_num_part_4">
+                    <h4>####</h4>
+                </div>
+            </div>
+            <h4 class="show_cvv"></h4>
+            <div class="show_holder" id="show_holder">
+                <h6>Card Holder</h6>
+                <h4>Jon Doe</h4>
+            </div>
+            <div class="show_expire">
+                <h6>Expire</h6>
+                <span>
+                    <h4>MM</h4><span>/</span><h4>YY</h4>
+                </span>
+            </div>
+        </div>
+        <div class="inf">
+            
+            <div class="c_number" >
+                <h4>Card Number</h4>
+                <div class="inp_c_number">
+                    <input type="text" placeholder="1234">
+                    <input type="text" placeholder="1234">
+                    <input type="text" placeholder="1234">
+                    <input type="text" placeholder="1234">
+                </div>
+            </div>
+            <div class="c_holder">
+                <h4>Card Holder</h4>
+                <input type="text" placeholder="Card Holder">
+            </div>
+            <div class="exp">
+                <div class="date">
+                    <h4>Expiration Date</h4>
+                    <div class="M_Y">
+                        <input type="text" placeholder="Mounth">
+                        <input type="text" placeholder="year">
+                    </div>
+                </div>
+                <div class="p_cvv">
+                    <h4>CVV</h4>
+                    <div class="cvv">
+                        <input type="text" placeholder="CVV">
+                    </div>
+                </div>
+            </div>
+            <div class="submit">
+                <button>Submit</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+<script>
+    let cvv = document.querySelector('.cvv>input')
+    let inp = document.querySelector('.inp')
+    cvv.addEventListener('input' , (e)=>{
+        inp.style.transform = 'rotateY(180deg)'
+        let _sub = e.target.value
+        let show_cvv = document.querySelector('.show_cvv')
+        e.target.value = _sub.substring(0 , 3)
+        show_cvv.innerHTML = e.target.value
+    })
+    let card_number1 = document.querySelector('.inp_c_number>input:nth-of-type(1)')
+    let card_number2 = document.querySelector('.inp_c_number>input:nth-of-type(2)')
+    let card_number3 = document.querySelector('.inp_c_number>input:nth-of-type(3)')
+    let card_number4 = document.querySelector('.inp_c_number>input:nth-of-type(4)')
+    // console.log(card_number1);
+    let num1 = document.querySelector('.show_num_part_1>h4')
+    let num2 = document.querySelector('.show_num_part_2>h4')
+    let num3 = document.querySelector('.show_num_part_3>h4')
+    let num4 = document.querySelector('.show_num_part_4>h4')
+    // console.log(card_number);
+    card_number1.addEventListener('click',()=>{
+        rotate()
+    })
+    card_number1.addEventListener('input',(e)=>{
+        e.target.value = e.target.value.substring(0 , 4)
+        num1.innerHTML = e.target.value
+        if (e.target.value.length == 4) {
+            card_number2.focus()
+        }
+    })
+    card_number2.addEventListener('click',()=>{
+        rotate()
+    })
+    card_number2.addEventListener('input',(e)=>{
+        e.target.value = e.target.value.substring(0 , 4)
+        num2.innerHTML = e.target.value
+        if (e.target.value.length == 4) {
+            card_number3.focus()
+        }
+    })
+    card_number3.addEventListener('click',()=>{
+        rotate()
+    })
+    card_number3.addEventListener('input',(e)=>{
+        e.target.value = e.target.value.substring(0 , 4)
+        num3.innerHTML = e.target.value
+        if (e.target.value.length == 4) {
+            card_number4.focus()
+        }
+    })
+    let c_hold = document.querySelector('.c_holder>input')
+    let s_holder = document.querySelector('.show_holder>h4')
+    card_number4.addEventListener('click',()=>{
+        rotate()
+    })
+    card_number4.addEventListener('input',(e)=>{
+        e.target.value = e.target.value.substring(0 , 4)
+        num4.innerHTML = e.target.value
+        if (e.target.value.length == 4) {
+            c_hold.focus()
+        }
+    })
+    let exp_mon = document.querySelector('.M_Y>input:nth-of-type(1)')
+    let exp_year = document.querySelector('.M_Y>input:nth-of-type(2)')
+    c_hold.addEventListener('click',()=>{
+        rotate()
+    })
+    c_hold.addEventListener('input' , (e)=>{
+        e.target.value = e.target.value.substring(0 , 18)
+        s_holder.innerHTML = e.target.value
+        if (e.target.value.length == 18) {
+            exp_mon.focus()
+        }
+        
+    })
+
+    let s_exp1 = document.querySelector('.show_expire>span>h4:nth-of-type(1)')
+    let s_exp2 = document.querySelector('.show_expire>span>h4:nth-of-type(2)')
+
+    exp_mon.addEventListener('click',()=>{
+        rotate()
+    })
+    exp_mon.addEventListener('input' , (e)=>{
+        e.target.value = e.target.value.substring(0 , 2)
+        s_exp1.innerHTML = e.target.value
+        if (e.target.value.length == 2) {
+            exp_year.focus()
+        }
+        
+    })
+    exp_year.addEventListener('click',()=>{
+        rotate()
+    })
+    exp_year.addEventListener('input' , (e)=>{
+        e.target.value = e.target.value.substring(0 , 2)
+        s_exp2.innerHTML = e.target.value
+        if (e.target.value.length == 2) {
+            cvv.focus()
+        }
+        
+    })
+
+
+
+
+    function rotate() {
+        inp.style.transform = 'rotateY(0deg)'
+    }
+</script> 
+</html>
